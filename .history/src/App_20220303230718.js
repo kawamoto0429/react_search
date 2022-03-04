@@ -15,6 +15,10 @@ function App() {
   return (
     <div className="App">
       {<Search reload={reload} setReload={setReload}/>}
+      {<List reload={reload} setReload={setReload}/>}
+      <Routes>
+        <Route path="/list" element={<List/>}/>
+      </Routes>
       {reload && <button onClick={reset}>リロードする</button>}  
     </div>
   )  

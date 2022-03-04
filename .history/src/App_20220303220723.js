@@ -5,17 +5,14 @@ import  List  from "./components/List";
 import './App.css';
 
 function App() {
-  const [reload, setReload] = useState(false)
-
-  function reset() {
-    setReload(false);
-    window.location.reload()
-  }
-
+  cosnt [reload, setreload] = useState(false)
   return (
     <div className="App">
-      {<Search reload={reload} setReload={setReload}/>}
-      {reload && <button onClick={reset}>リロードする</button>}  
+      {<Search />}
+      {<List/>}
+      <Routes>
+        <Route path="/list" element={<List/>}/>
+      </Routes>  
     </div>
   )  
 }

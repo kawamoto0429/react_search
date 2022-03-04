@@ -7,14 +7,18 @@ import './App.css';
 function App() {
   const [reload, setReload] = useState(false)
 
-  function reset() {
+  const reset = () => {
     setReload(false);
-    window.location.reload()
+    location.reload()
   }
 
   return (
     <div className="App">
       {<Search reload={reload} setReload={setReload}/>}
+      {<List reload={reload} setReload={setReload}/>}
+      <Routes>
+        <Route path="/list" element={<List/>}/>
+      </Routes>
       {reload && <button onClick={reset}>リロードする</button>}  
     </div>
   )  
