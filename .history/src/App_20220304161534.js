@@ -6,12 +6,12 @@ import Dummy from "./Dummy";
 import './App.css';
 
 function App() {
-  const [displayList, setDisplayList] = useState(false)
-
+  const [displayList, setDisplayList] = useState(true)
+  
   return (
     <div className="App">
       {<Search setDisplayList={setDisplayList}/>}
-      {displayList || Dummy.map((item)=>{
+      {displayList && Dummy.map((item)=>{
         <List
           key={item.id}
           id={item.id}

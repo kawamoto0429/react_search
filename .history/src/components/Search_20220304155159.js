@@ -2,15 +2,13 @@ import React, { useEffect, useState, } from "react";
 import List from "./List"
 import Dummy from "../Dummy"
 
-export default function Serach({setDisplayList}) {
-  const [text, setText] = useState(localStorage.getItem("hoge"));
+export default function Serach({reload, setReload}) {
+  const [text, setText] = useState("");
   const [dummies, setDummies] = useState(Dummy)
-  const [reload, setReload] = useState(false)
-
-  const fetch = () => {
+  const [on, setOn] = useState(false)
+  useEffect(()=>{
     if (text === "") {
       setDummies(dummies);
-      console.log("sss")
       return;
     }
     const data = dummies.filter((item)=>{
@@ -19,9 +17,7 @@ export default function Serach({setDisplayList}) {
       return value.includes(keyword)
     })
     setDummies(data)
-    console.log("ttt")
-  }
-
+  },[on])
   const inputValue = (e) => {
     setText(e.target.value)
   }
@@ -38,23 +34,11 @@ export default function Serach({setDisplayList}) {
 
   function submitValue(e) {
     e.preventDefault();
-    if (window.localStorage) {
-      const txt = text
-      localStorage.setItem("hoge", txt);
-      console.log("ok")
-    }
-    setDisplayList(true)
+    console.log(e.target.value)
     console.log(text);
     setReload(true);
-    fetch()
+    setOn(!on);
   }
-
-  function reset() {
-    setReload(false);
-    setDisplayList(false)
-    window.location.reload()
-  }
-
   return (
     <div>
       <div>
@@ -64,7 +48,6 @@ export default function Serach({setDisplayList}) {
       <div>
         {list}
       </div>
-      {reload && <button onClick={reset}>リロードする</button>}  
     </div>
   );
 }

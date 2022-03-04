@@ -5,9 +5,10 @@ import Dummy from "../Dummy"
 export default function Serach({setDisplayList}) {
   const [text, setText] = useState(localStorage.getItem("hoge"));
   const [dummies, setDummies] = useState(Dummy)
+  const [on, setOn] = useState(false);
   const [reload, setReload] = useState(false)
 
-  const fetch = () => {
+  useEffect(()=>{
     if (text === "") {
       setDummies(dummies);
       console.log("sss")
@@ -20,8 +21,7 @@ export default function Serach({setDisplayList}) {
     })
     setDummies(data)
     console.log("ttt")
-  }
-
+  },[on])
   const inputValue = (e) => {
     setText(e.target.value)
   }
@@ -46,7 +46,7 @@ export default function Serach({setDisplayList}) {
     setDisplayList(true)
     console.log(text);
     setReload(true);
-    fetch()
+    setOn(!on);
   }
 
   function reset() {
